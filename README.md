@@ -1,2 +1,2 @@
 # c
-Learn the C programming language.
+Learn the C programming language from sratch.
