@@ -5,6 +5,7 @@
 int main(void)
 {
     int c;
+    int last_char = ' ';    /* to handle edge case */
 
     while (EOF != (c = getchar()))
     {
@@ -12,15 +13,11 @@ int main(void)
         {
             putchar(c);
         }
-        else
+        else if (' ' != last_char)
         {
-            while (' ' == c)
-            {
-                c = getchar();
-            }
-            putchar(' ');
             putchar(c);
         }
+        last_char = c; /* store the last character */
     }
 
     return 0;
