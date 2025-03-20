@@ -1,6 +1,6 @@
 /**
  * Print a histogram of the lengths of words in its input
- * First version: bars horizontal
+ * Second version: vertical horizontal
  */
 
 #include <stdio.h>
@@ -14,6 +14,7 @@ int main(void)
     int c;
     int i;
     int max_len = 0;                /* word which has longest length */
+    int max_wl = 0;                 /* word with the most frequency */
 
     for (i = 0; i < MAX_SIZE; i++)
     {
@@ -37,18 +38,37 @@ int main(void)
         }
     }
 
-    for (i = 1; i <= max_len; i++)
+    /* find the max_wl */
+    for (i = 0; i <= max_len; i++)
     {
-        printf("%3d | ", i);
-        if (0 != words_len[i])
+        if (words_len[i] > max_wl)
         {
-            while (words_len[i])
+            max_wl = words_len[i];
+        }
+    }
+
+    while (max_wl > (-1))
+    {
+        printf("%2d | ", max_wl);
+        for (i = 1; i <= max_len; i++)
+        {
+            if (words_len[i] >= (max_wl + 1))
             {
-                putchar('*');
-                words_len[i]--;
+                printf("| ");
+            }
+            else
+            {
+                printf("  ");
             }
         }
         putchar('\n');
+        max_wl--;
+    }
+
+    printf("   0 ");
+    for (i = 1; i <= max_len; i++)
+    {
+        printf("%d ", i);
     }
     putchar('\n');
 
