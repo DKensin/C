@@ -47,24 +47,19 @@ int main(void)
         }
     }
 
+    /* Print vertical histogram */
     while (max_wl > (-1))
     {
         printf("%2d | ", max_wl);
         for (i = 1; i <= max_len; i++)
         {
-            if (words_len[i] >= (max_wl + 1))
-            {
-                printf("| ");
-            }
-            else
-            {
-                printf("  ");
-            }
+            printf("%s ", (words_len[i] >= (max_wl + 1) ? ("|") : (" ")));
         }
         putchar('\n');
         max_wl--;
     }
 
+    /* Print axis label */
     printf("   0 ");
     for (i = 1; i <= max_len; i++)
     {
