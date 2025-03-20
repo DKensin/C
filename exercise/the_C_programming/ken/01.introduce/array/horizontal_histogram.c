@@ -22,21 +22,18 @@ int main(void)
 
     while (EOF != (c = getchar()))
     {
-        if ((',' != c) && ('.' != c))       /* skip command and dot character */
+        if ((' ' == c) || ('\n' == c))  /* if encounter a blank or newline */
         {
-            if ((' ' == c) || ('\n' == c))  /* if encounter a blank or newline */
+            words_len[len]++;           /* record len of word */
+            if (len > max_len)
             {
-                words_len[len]++;           /* record len of word */
-                if (len > max_len)
-                {
-                    max_len = len;          /* count word has longest length */
-                }
-                len = 0;
+                max_len = len;          /* count word has longest length */
             }
-            else
-            {
-                len++;
-            }
+            len = 0;
+        }
+        else if ((',' != c) && ('.' != c))       /* skip command and dot character */
+        {
+            len++;
         }
     }
 
@@ -47,13 +44,13 @@ int main(void)
         {
             while(words_len[i])
             {
-                printf("*");
+                putchar('*');
                 words_len[i]--;
             }
         }
-        printf("\n");
+        putchar('\n');
     }
-    printf("\n");
+    putchar('\n');
 
     return 0;
 }
