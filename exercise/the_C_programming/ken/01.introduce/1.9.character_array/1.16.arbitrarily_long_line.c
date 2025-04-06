@@ -43,7 +43,7 @@ int main(void)
 int get_line(char **line)
 {
     int c;
-    int len = -1;
+    int len = 0;
     int capacity = CHUNK;
 
     *line  = (char *)malloc(capacity * sizeof(char));
@@ -62,7 +62,7 @@ int get_line(char **line)
                     break;
                 }
             }
-            (*line)[++len] = c;
+            (*line)[len++] = c;
         }
     }
     if (c == '\n')
@@ -78,7 +78,7 @@ int get_line(char **line)
 void copy(char **to, char *from)
 {
     int len = 0;
-    *to = NULL;
+    int i;
 
     while (from[len] != '\0')
     {
@@ -90,10 +90,9 @@ void copy(char **to, char *from)
 
     if (NULL != *to)
     {
-        while (from[len] != '\0')
+        for (i = 0; i <= len; i++)  /* include \0 for string terminate */
         {
-            (*to)[len] = from[len];
-            len++;
+            (*to)[i] = from[i];
         }
     }
 }
